@@ -264,7 +264,7 @@
 <REGION ID="6730" RegionName="Usuario" XPos="5" YPos="328" Width="761" Height="610" RegionColor="3" TablePrefix="0" TableType="0" OverwriteTablePrefix="0" OverwriteTableType="0" Comments="" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="25" />
 </REGIONS>
 <TABLES>
-<TABLE ID="3512" Tablename="Cliente" PrevTableName="Table_01" XPos="276" YPos="53" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="3" >
+<TABLE ID="3512" Tablename="Cliente" PrevTableName="Table_01" XPos="269" YPos="48" TableType="0" TablePrefix="0" nmTable="0" Temporary="0" UseStandardInserts="0" StandardInserts="\n" TableOptions="DelayKeyTblUpdates=0\nPackKeys=0\nRowChecksum=0\nRowFormat=0\nUseRaid=0\nRaidType=0\n" Comments="" Collapsed="0" IsLinkedObject="0" IDLinkedModel="-1" Obj_id_Linked="-1" OrderPos="3" >
 <COLUMNS>
 <COLUMN ID="3515" ColName="idCliente" PrevColName="" Pos="0" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="1" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
@@ -319,6 +319,11 @@
 </COLUMN>
 <COLUMN ID="3538" ColName="FechaAlta" PrevColName="" Pos="9" idDatatype="14" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
+</OPTIONSELECTED>
+</COLUMN>
+<COLUMN ID="6732" ColName="Token" PrevColName="" Pos="12" idDatatype="20" DatatypeParams="(255)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<OPTIONSELECTED>
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 <COLUMN ID="4263" ColName="StatusCliente" PrevColName="" Pos="7" idDatatype="22" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
