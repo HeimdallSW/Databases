@@ -1,0 +1,13 @@
+Parametros de conexión base de datos "Heimdall Admin"
+
+mysql://bd44f845bbaf18:ab2cde10@us-cdbr-east-04.cleardb.com/heroku_b21b25474d81c3d?reconnect=true
+
+Host:us-cdbr-east-04.cleardb.com
+
+User:bd44f845bbaf18
+
+Password:ab2cde10
+
+Database:heroku_b21b25474d81c3d
+
+
