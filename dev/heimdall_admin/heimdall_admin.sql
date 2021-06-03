@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2021 a las 17:30:44
+-- Tiempo de generación: 03-06-2021 a las 16:45:56
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -48,7 +48,8 @@ CREATE TABLE `acceso` (
 
 CREATE TABLE `administradorheimdall` (
   `idAdministrador` int(10) UNSIGNED NOT NULL,
-  `Grupo_idGrupo` int(10) UNSIGNED NOT NULL,
+  `Filial_Cliente_idCliente` int(10) UNSIGNED NOT NULL,
+  `Filial_idFilial` int(10) UNSIGNED NOT NULL,
   `TipoAdministrador` varchar(45) DEFAULT NULL,
   `Nombre` varchar(100) DEFAULT NULL,
   `ApellidorP` varchar(100) DEFAULT NULL,
@@ -87,7 +88,9 @@ CREATE TABLE `cliente` (
   `NombreDirector` varchar(50) DEFAULT NULL,
   `Ambito` varchar(100) DEFAULT NULL,
   `FechaAlta` date DEFAULT NULL,
-  `StatusCliente` tinyint(1) DEFAULT NULL
+  `Token` varchar(255) DEFAULT NULL,
+  `StatusCliente` tinyint(1) DEFAULT NULL,
+  `FechaActivacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -115,6 +118,21 @@ CREATE TABLE `componente` (
   `DireccionProveedor` varchar(100) DEFAULT NULL,
   `UrlProveedor` varchar(255) DEFAULT NULL,
   `StatusComponente` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contrato`
+--
+
+CREATE TABLE `contrato` (
+  `idContrato` int(10) UNSIGNED NOT NULL,
+  `Cliente_idCliente` int(10) UNSIGNED NOT NULL,
+  `FechaInicio` date DEFAULT NULL,
+  `FechaTermino` date DEFAULT NULL,
+  `Vigencia` decimal(65,0) DEFAULT NULL,
+  `Url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -164,19 +182,6 @@ CREATE TABLE `filial` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `grupo`
---
-
-CREATE TABLE `grupo` (
-  `idGrupo` int(10) UNSIGNED NOT NULL,
-  `NombreGrupo` varchar(50) DEFAULT NULL,
-  `Descripcion` text DEFAULT NULL,
-  `StatusGrupo` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `mantenimiento`
 --
 
@@ -194,35 +199,6 @@ CREATE TABLE `mantenimiento` (
   `FechaFin` date DEFAULT NULL,
   `PersonalMantenimiento` varchar(80) DEFAULT NULL,
   `ReporteMantenimiento` blob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `moduloheimdall`
---
-
-CREATE TABLE `moduloheimdall` (
-  `idModuloHeimdall` int(10) UNSIGNED NOT NULL,
-  `Nombre` varchar(50) DEFAULT NULL,
-  `UrlModulo` varchar(255) DEFAULT NULL,
-  `Descripcion` text DEFAULT NULL,
-  `StatusModulo` tinyint(1) DEFAULT NULL,
-  `Crear` tinyint(1) DEFAULT NULL,
-  `Leer` tinyint(1) DEFAULT NULL,
-  `Editar` tinyint(1) DEFAULT NULL,
-  `Eliminar` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `moduloheimdall_has_grupo`
---
-
-CREATE TABLE `moduloheimdall_has_grupo` (
-  `Grupo_idGrupo` int(10) UNSIGNED NOT NULL,
-  `ModuloHeimdall_idModuloHeimdall` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -260,8 +236,8 @@ ALTER TABLE `acceso`
 -- Indices de la tabla `administradorheimdall`
 --
 ALTER TABLE `administradorheimdall`
-  ADD PRIMARY KEY (`idAdministrador`,`Grupo_idGrupo`),
-  ADD KEY `Administrador_FKIndex2` (`Grupo_idGrupo`);
+  ADD PRIMARY KEY (`idAdministrador`,`Filial_Cliente_idCliente`,`Filial_idFilial`),
+  ADD KEY `AdministradorHeimdall_FKIndex1` (`Filial_idFilial`,`Filial_Cliente_idCliente`);
 
 --
 -- Indices de la tabla `cliente`
@@ -275,6 +251,13 @@ ALTER TABLE `cliente`
 ALTER TABLE `componente`
   ADD PRIMARY KEY (`idComponente`,`Pedestal_Acceso_idAcceso`,`Pedestal_Acceso_Filial_Cliente_idCliente`,`Pedestal_Acceso_Filial_idFilial`,`Pedestal_idPedestal`),
   ADD KEY `Componente_FKIndex1` (`Pedestal_idPedestal`,`Pedestal_Acceso_Filial_idFilial`,`Pedestal_Acceso_Filial_Cliente_idCliente`,`Pedestal_Acceso_idAcceso`);
+
+--
+-- Indices de la tabla `contrato`
+--
+ALTER TABLE `contrato`
+  ADD PRIMARY KEY (`idContrato`,`Cliente_idCliente`),
+  ADD KEY `Contrato_FKIndex1` (`Cliente_idCliente`);
 
 --
 -- Indices de la tabla `direccion`
@@ -291,31 +274,11 @@ ALTER TABLE `filial`
   ADD KEY `Filial_FKIndex1` (`Cliente_idCliente`);
 
 --
--- Indices de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  ADD PRIMARY KEY (`idGrupo`);
-
---
 -- Indices de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
   ADD PRIMARY KEY (`idMantenimiento`,`Pedestal_Acceso_idAcceso`,`Pedestal_Acceso_Filial_Cliente_idCliente`,`Pedestal_Acceso_Filial_idFilial`,`Pedestal_idPedestal`),
   ADD KEY `Mantenimiento_FKIndex1` (`Pedestal_idPedestal`,`Pedestal_Acceso_Filial_idFilial`,`Pedestal_Acceso_Filial_Cliente_idCliente`,`Pedestal_Acceso_idAcceso`);
-
---
--- Indices de la tabla `moduloheimdall`
---
-ALTER TABLE `moduloheimdall`
-  ADD PRIMARY KEY (`idModuloHeimdall`);
-
---
--- Indices de la tabla `moduloheimdall_has_grupo`
---
-ALTER TABLE `moduloheimdall_has_grupo`
-  ADD PRIMARY KEY (`Grupo_idGrupo`,`ModuloHeimdall_idModuloHeimdall`),
-  ADD KEY `ModuloHeimdall_has_Grupo_FKIndex1` (`Grupo_idGrupo`),
-  ADD KEY `ModuloHeimdall_has_Grupo_FKIndex2` (`ModuloHeimdall_idModuloHeimdall`);
 
 --
 -- Indices de la tabla `pedestal`
@@ -344,7 +307,13 @@ ALTER TABLE `administradorheimdall`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idCliente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `contrato`
+--
+ALTER TABLE `contrato`
+  MODIFY `idContrato` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion`
@@ -359,22 +328,10 @@ ALTER TABLE `filial`
   MODIFY `idFilial` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  MODIFY `idGrupo` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
   MODIFY `idMantenimiento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `moduloheimdall`
---
-ALTER TABLE `moduloheimdall`
-  MODIFY `idModuloHeimdall` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedestal`
@@ -396,13 +353,19 @@ ALTER TABLE `acceso`
 -- Filtros para la tabla `administradorheimdall`
 --
 ALTER TABLE `administradorheimdall`
-  ADD CONSTRAINT `administradorheimdall_ibfk_1` FOREIGN KEY (`Grupo_idGrupo`) REFERENCES `grupo` (`idGrupo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `administradorheimdall_ibfk_1` FOREIGN KEY (`Filial_idFilial`,`Filial_Cliente_idCliente`) REFERENCES `filial` (`idFilial`, `Cliente_idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `componente`
 --
 ALTER TABLE `componente`
   ADD CONSTRAINT `componente_ibfk_1` FOREIGN KEY (`Pedestal_idPedestal`,`Pedestal_Acceso_Filial_idFilial`,`Pedestal_Acceso_Filial_Cliente_idCliente`,`Pedestal_Acceso_idAcceso`) REFERENCES `pedestal` (`idPedestal`, `Acceso_Filial_idFilial`, `Acceso_Filial_Cliente_idCliente`, `Acceso_idAcceso`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `contrato`
+--
+ALTER TABLE `contrato`
+  ADD CONSTRAINT `contrato_ibfk_1` FOREIGN KEY (`Cliente_idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `direccion`
@@ -421,13 +384,6 @@ ALTER TABLE `filial`
 --
 ALTER TABLE `mantenimiento`
   ADD CONSTRAINT `mantenimiento_ibfk_1` FOREIGN KEY (`Pedestal_idPedestal`,`Pedestal_Acceso_Filial_idFilial`,`Pedestal_Acceso_Filial_Cliente_idCliente`,`Pedestal_Acceso_idAcceso`) REFERENCES `pedestal` (`idPedestal`, `Acceso_Filial_idFilial`, `Acceso_Filial_Cliente_idCliente`, `Acceso_idAcceso`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `moduloheimdall_has_grupo`
---
-ALTER TABLE `moduloheimdall_has_grupo`
-  ADD CONSTRAINT `moduloheimdall_has_grupo_ibfk_1` FOREIGN KEY (`Grupo_idGrupo`) REFERENCES `grupo` (`idGrupo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `moduloheimdall_has_grupo_ibfk_2` FOREIGN KEY (`ModuloHeimdall_idModuloHeimdall`) REFERENCES `moduloheimdall` (`idModuloHeimdall`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `pedestal`
