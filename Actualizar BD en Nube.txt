@@ -1,0 +1,59 @@
+********************************************************
+****Cambios en la Base de Datos ya montada en la Nube***
+********************************************************
+
+////////////////////////////////////////////////////////
+1.- Actualizacion de archivos de Diseño
+////////////////////////////////////////////////////////
+
+a) Modificando archivo de diseño en DBDESIGNER
+De la carpeta de GitHub local
+Buscar el archivo xml
+Abrir archivo xml en DBDesigner
+Hacer modificaciones pertinentes
+Guardamos y sobreescribimos el archivo xml que esta en Github
+
+b) En la carpeta de Github
+buscar el archivo del modelo en Workbench con extension mwv
+das doble click y deberia abrirlo en Workbench
+Hacer modificaciones pertinentes
+Guardamos el Modelo y sobreescribimos el archivo en Github
+
+////////////////////////////////////////////////////////
+2.- Modificaciones en Base de datos local
+////////////////////////////////////////////////////////
+
+c) Ir a la base de datos local
+Hacer las modificaciones pertinentes de forma manual
+previsualizar el SQL 
+copiar y pegar
+guardar cambio
+
+////////////////////////////////////////////////////////
+3.- Modificaciones en Base de datos en la Nube
+////////////////////////////////////////////////////////
+
+d) Abrir la instancia en wokbench donde se hará el cambio
+ejecutar sentencias SQL
+use heroku_294451515424
+Pegar sentencia SQL de la base de datos local
+
+Repetimos el paso 3 y 4 para hacer n modificaciones
+
+Ejecutamos el cambio - con rayito
+
+////////////////////////////////////////////////////////
+4.- Generación de archivo nuevo de SQL
+////////////////////////////////////////////////////////
+
+Exportar el SQL con los cambios hechos
+y sobreescribir ese archivo en GitHub
+
+////////////////////////////////////////////////////////
+5.- Actualizar cambios
+////////////////////////////////////////////////////////
+
+Github
+Hacer commit de los 4 cambios .xml, .sql, .mwb y .bak (autogenerado)
+
+Push en master
