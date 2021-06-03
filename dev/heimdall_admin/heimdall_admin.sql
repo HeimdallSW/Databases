@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2021 a las 16:45:56
+-- Tiempo de generación: 03-06-2021 a las 17:44:26
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -131,7 +131,7 @@ CREATE TABLE `contrato` (
   `Cliente_idCliente` int(10) UNSIGNED NOT NULL,
   `FechaInicio` date DEFAULT NULL,
   `FechaTermino` date DEFAULT NULL,
-  `Vigencia` decimal(65,0) DEFAULT NULL,
+  `Vigencia` char(3) DEFAULT NULL,
   `Url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
