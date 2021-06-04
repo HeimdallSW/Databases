@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2021 a las 17:44:26
+-- Tiempo de generación: 04-06-2021 a las 19:11:11
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `heimdall_admin`
+-- Base de datos: `heimdall_admin1`
 --
 
 -- --------------------------------------------------------
@@ -43,16 +43,44 @@ CREATE TABLE `acceso` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `administradorheimdall`
+-- Estructura de tabla para la tabla `administradorcliente`
 --
 
-CREATE TABLE `administradorheimdall` (
+CREATE TABLE `administradorcliente` (
   `idAdministrador` int(10) UNSIGNED NOT NULL,
   `Filial_Cliente_idCliente` int(10) UNSIGNED NOT NULL,
   `Filial_idFilial` int(10) UNSIGNED NOT NULL,
   `TipoAdministrador` varchar(45) DEFAULT NULL,
   `Nombre` varchar(100) DEFAULT NULL,
-  `ApellidorP` varchar(100) DEFAULT NULL,
+  `ApellidoP` varchar(100) DEFAULT NULL,
+  `ApellidoM` varchar(100) DEFAULT NULL,
+  `Genero` varchar(15) DEFAULT NULL,
+  `FechaNacimiento` date DEFAULT NULL,
+  `Curp` varchar(18) DEFAULT NULL,
+  `NSS` varchar(11) DEFAULT NULL,
+  `Telefono` varchar(10) DEFAULT NULL,
+  `CodigoAdmin` varchar(30) DEFAULT NULL,
+  `Correo` varchar(80) DEFAULT NULL,
+  `Usuario` varchar(15) DEFAULT NULL,
+  `Contrasena` varchar(15) DEFAULT NULL,
+  `Area` varchar(50) DEFAULT NULL,
+  `Turno` varchar(20) DEFAULT NULL,
+  `Foto` varchar(255) DEFAULT NULL,
+  `FechaAlta` date DEFAULT NULL,
+  `StatusAdmin` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administradorheimdall`
+--
+
+CREATE TABLE `administradorheimdall` (
+  `idAdministradorHeimdall` int(10) UNSIGNED NOT NULL,
+  `TipoAdmnistrador` varchar(45) DEFAULT NULL,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `ApellidoP` varchar(100) DEFAULT NULL,
   `ApellidoM` varchar(100) DEFAULT NULL,
   `Genero` varchar(15) DEFAULT NULL,
   `FechaNacimiento` date DEFAULT NULL,
@@ -90,6 +118,7 @@ CREATE TABLE `cliente` (
   `FechaAlta` date DEFAULT NULL,
   `Token` varchar(255) DEFAULT NULL,
   `StatusCliente` tinyint(1) DEFAULT NULL,
+  `UrlSitioHeimdall` varchar(255) DEFAULT NULL,
   `FechaActivacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -233,11 +262,17 @@ ALTER TABLE `acceso`
   ADD KEY `Acceso_FKIndex1` (`Filial_idFilial`,`Filial_Cliente_idCliente`);
 
 --
+-- Indices de la tabla `administradorcliente`
+--
+ALTER TABLE `administradorcliente`
+  ADD PRIMARY KEY (`idAdministrador`,`Filial_Cliente_idCliente`,`Filial_idFilial`),
+  ADD KEY `AdministradorHeimdall_FKIndex1` (`Filial_idFilial`,`Filial_Cliente_idCliente`);
+
+--
 -- Indices de la tabla `administradorheimdall`
 --
 ALTER TABLE `administradorheimdall`
-  ADD PRIMARY KEY (`idAdministrador`,`Filial_Cliente_idCliente`,`Filial_idFilial`),
-  ADD KEY `AdministradorHeimdall_FKIndex1` (`Filial_idFilial`,`Filial_Cliente_idCliente`);
+  ADD PRIMARY KEY (`idAdministradorHeimdall`);
 
 --
 -- Indices de la tabla `cliente`
@@ -298,10 +333,16 @@ ALTER TABLE `acceso`
   MODIFY `idAcceso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `administradorcliente`
+--
+ALTER TABLE `administradorcliente`
+  MODIFY `idAdministrador` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `administradorheimdall`
 --
 ALTER TABLE `administradorheimdall`
-  MODIFY `idAdministrador` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idAdministradorHeimdall` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -350,10 +391,10 @@ ALTER TABLE `acceso`
   ADD CONSTRAINT `acceso_ibfk_1` FOREIGN KEY (`Filial_idFilial`,`Filial_Cliente_idCliente`) REFERENCES `filial` (`idFilial`, `Cliente_idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `administradorheimdall`
+-- Filtros para la tabla `administradorcliente`
 --
-ALTER TABLE `administradorheimdall`
-  ADD CONSTRAINT `administradorheimdall_ibfk_1` FOREIGN KEY (`Filial_idFilial`,`Filial_Cliente_idCliente`) REFERENCES `filial` (`idFilial`, `Cliente_idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `administradorcliente`
+  ADD CONSTRAINT `administradorcliente_ibfk_1` FOREIGN KEY (`Filial_idFilial`,`Filial_Cliente_idCliente`) REFERENCES `filial` (`idFilial`, `Cliente_idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `componente`
