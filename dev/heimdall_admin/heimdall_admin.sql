@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2021 a las 19:11:11
--- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.2
+-- Tiempo de generación: 25-06-2021 a las 04:18:37
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `heimdall_admin1`
+-- Base de datos: `bd_heimdall_admin`
 --
 
 -- --------------------------------------------------------
@@ -39,6 +39,19 @@ CREATE TABLE `acceso` (
   `FechaActualizacion` timestamp NULL DEFAULT NULL,
   `StatusAcceso` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `acceso`
+--
+
+INSERT INTO `acceso` (`idAcceso`, `Filial_Cliente_idCliente`, `Filial_idFilial`, `Nombre`, `Prioridad`, `TipoAcceso`, `Descripcion`, `FechaAlta`, `FechaActualizacion`, `StatusAcceso`) VALUES
+(1, 1, 1, 'Puerta 1', 'Alta', 'Peatonal', 'Acceso Principal', '2021-06-04', NULL, 1),
+(2, 1, 1, 'Puerta 2', 'Alta', 'peatonal', 'Acceso por edificio de Biología', '2021-06-04', NULL, 1),
+(3, 2, 2, 'Entrada Principal', 'Alta', 'Entrada', NULL, '2021-06-04', NULL, 1),
+(4, 2, 2, 'Estacionamiento', 'Alta', 'Entrada', NULL, '2021-06-04', NULL, 1),
+(5, 3, 3, 'Entrada Principal', 'Alta', 'Entrada', NULL, '2021-06-04', NULL, 1),
+(6, 3, 3, 'Entrada Secundaria', 'Alta', 'Entrada', NULL, '2021-06-04', NULL, 1),
+(7, 3, 3, 'Estacionamiento', 'Alta', 'Entrada/Salida', NULL, '2021-06-04', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -70,6 +83,15 @@ CREATE TABLE `administradorcliente` (
   `StatusAdmin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `administradorcliente`
+--
+
+INSERT INTO `administradorcliente` (`idAdministrador`, `Filial_Cliente_idCliente`, `Filial_idFilial`, `TipoAdministrador`, `Nombre`, `ApellidoP`, `ApellidoM`, `Genero`, `FechaNacimiento`, `Curp`, `NSS`, `Telefono`, `CodigoAdmin`, `Correo`, `Usuario`, `Contrasena`, `Area`, `Turno`, `Foto`, `FechaAlta`, `StatusAdmin`) VALUES
+(1, 1, 1, 'Principal', 'Eulalio', 'Bautista', 'Hernández', 'masculino', '1990-11-07', 'BAHE901107', '19818973893', '5560302140', 'admin01', 'eulaliobh@gmail.com', '', '', 'Dirección', 'Matutino y Vespertin', NULL, '2021-06-04', 1),
+(2, 2, 2, 'Principal', 'Edmundo', 'Ramírez', 'Sánchez', 'Masculino', '2021-06-03', 'EDMU25041979', '12345678901', '1234567890', 'admin02', 'edmundo@utvm.edu.mx', NULL, NULL, 'Administrativo', 'Matutino', NULL, '2021-06-04', 1),
+(3, 3, 3, 'Principal', 'María Teresa', 'Arroyo', 'Rojas', 'Femenino', '1988-09-15', 'MTRF880915', '12345678923', '5689461523', 'admin03', 'mtarroyo@ioriente.edu.mx', NULL, NULL, 'Dirección', 'Matutino', NULL, '2021-06-04', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -98,6 +120,15 @@ CREATE TABLE `administradorheimdall` (
   `StatusAdmin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `administradorheimdall`
+--
+
+INSERT INTO `administradorheimdall` (`idAdministradorHeimdall`, `TipoAdmnistrador`, `Nombre`, `ApellidoP`, `ApellidoM`, `Genero`, `FechaNacimiento`, `Curp`, `NSS`, `Telefono`, `CodigoAdmin`, `Correo`, `Usuario`, `Contrasena`, `Area`, `Turno`, `Foto`, `FechaAlta`, `StatusAdmin`) VALUES
+(1, 'Principal', 'Roberto Isaac', 'Suaste', 'Martínez', 'Masculino', NULL, NULL, NULL, '5543654766', 'adminaira01', 'isaac@aira.mx', NULL, NULL, 'Desarrollo', 'Matutino', NULL, '2021-06-04', 1),
+(2, 'General', 'Adair', 'Cruz', 'Guerrero', 'Masculino', '1999-07-25', 'CUGA990725HHGRRD04', NULL, '7712417279', 'adminaira02', 'adair@aira.mx', '', '', 'Desarrollo', 'Matutino', NULL, '2021-06-04', 1),
+(3, 'General', 'Israel', 'Rebolledo', 'Hernández', 'masculino', '1982-11-23', 'REHI821123', '82374239934', '5514160025', 'adminaira03', 'israel@aira.mx', '', '', 'Desarrollo', 'matutino', NULL, '2021-06-04', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +152,15 @@ CREATE TABLE `cliente` (
   `UrlSitioHeimdall` varchar(255) DEFAULT NULL,
   `FechaActivacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `GiroComercial`, `Nombre`, `RFC`, `Telefono`, `Correo`, `Url`, `Tamano`, `NombreDirector`, `Ambito`, `FechaAlta`, `Token`, `StatusCliente`, `UrlSitioHeimdall`, `FechaActivacion`) VALUES
+(1, 'Educación', 'Universidad Autónoma Metropolitana', 'UAM740223H78', '5529301276', 'contacto@uam.edu.mx', 'http://www.uam.mx', 'G', 'Ángel Pérez Bautista', 'Universitario', '2021-06-04', '897561', 1, NULL, '2021-06-18'),
+(2, 'Servicios', 'Universidad Tecnológica del Valle del Mezquital', 'UTV960729IJ3', '7597235684', 'utvm@utvm.edu.mx', 'http://www.utvm.edu.mx', 'G', 'Marco Antonio Ocadiz Cruz', 'Universidad Tecnologica', '2021-06-04', '957463', 1, NULL, '2021-06-18'),
+(3, 'Educación', 'Instituto Oriente', 'IOP891006QF0', '2222450100', 'informes@ioriente.edu.mx', 'http://www.ioriente.edu.mx/', 'M', 'Enrique Flota Ocampo', 'Colegio Privado', '2021-06-04', '134975', 1, NULL, '2021-06-18');
 
 -- --------------------------------------------------------
 
@@ -164,6 +204,15 @@ CREATE TABLE `contrato` (
   `Url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `contrato`
+--
+
+INSERT INTO `contrato` (`idContrato`, `Cliente_idCliente`, `FechaInicio`, `FechaTermino`, `Vigencia`, `Url`) VALUES
+(1, 1, '2021-06-04', '2022-06-04', '12', NULL),
+(2, 2, '2021-06-04', '2022-06-04', '12', NULL),
+(3, 3, '2021-06-04', '2021-06-04', '12', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -189,6 +238,15 @@ CREATE TABLE `direccion` (
   `Refencia` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `direccion`
+--
+
+INSERT INTO `direccion` (`idDireccion`, `Filial_Cliente_idCliente`, `Filial_idFilial`, `Pais`, `Estado`, `Municipio`, `Colonia`, `CP`, `Calle`, `NumeroInterior`, `NumeroExterior`, `NombreEdificio`, `Latitud`, `Longitud`, `UrlUbicacion`, `Refencia`) VALUES
+(1, 1, 1, 'México', 'CDMX', 'Iztapalapa', 'Leyes de reforma 1ra secc', '09340', 'Av. San Rafael Atlixco', NULL, '186', NULL, '19°21′41″N', '99°04′22″O', NULL, 'entre eje 6 y sur 21'),
+(2, 2, 2, 'México', 'Hidalgo', 'Ixmiquilpan', 'El Nith', '42300', 'Carretera Ixmiquilpan-Capula Km. 4', 'N/A', 'N/A', NULL, '20.4831', '-99.2171', NULL, NULL),
+(3, 3, 3, 'México', 'Puebla', 'Puebla', 'Jardines de San Manuel ', '72570', 'Av. San Francisco ', NULL, NULL, NULL, '19.010762', '-98.201703', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -207,6 +265,15 @@ CREATE TABLE `filial` (
   `FechaAlta` date DEFAULT NULL,
   `StatusFilial` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `filial`
+--
+
+INSERT INTO `filial` (`idFilial`, `Cliente_idCliente`, `TipoFilial`, `Nombre`, `Encargado`, `Correo`, `Telefono1`, `Telefono2`, `FechaAlta`, `StatusFilial`) VALUES
+(1, 1, 'Unidad 1', 'UAM-Iztapalapa', 'Anastacio Clemente Ortíz', 'iztapalapa@uam.edu.mx', '5545206219', '5545206220', '2021-06-04', 1),
+(2, 2, 'Matriz', 'Campus Ixmiquilpan', 'Marco Antonio Ocadiz Cruz', 'aocadiz@utvm.edu.mx', '123456789', '987654321', '2021-06-04', 1),
+(3, 3, 'Matriz', 'Edificio Principal', 'María Teresa Arroyo Rojas', 'informes@ioriente.edu.mx', '2222450100', '2221411350', '2021-06-04', 1);
 
 -- --------------------------------------------------------
 
@@ -249,6 +316,34 @@ CREATE TABLE `pedestal` (
   `Actualizacion` timestamp NULL DEFAULT NULL,
   `StatusPedestal` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedestal`
+--
+
+INSERT INTO `pedestal` (`idPedestal`, `Acceso_Filial_idFilial`, `Acceso_Filial_Cliente_idCliente`, `Acceso_idAcceso`, `CodigoInterno`, `NumeroSerie`, `TipoConfiguracion`, `FechaInstalacion`, `Observaciones`, `Actualizacion`, `StatusPedestal`) VALUES
+(1, 1, 1, 1, '001', 'HG01', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(2, 1, 1, 1, '002', 'HG02', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(3, 1, 1, 1, '003', 'HG03', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(4, 1, 1, 2, '004', 'HG04', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(5, 1, 1, 2, '005', 'HG05', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(6, 2, 2, 3, '006', 'HG06', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(7, 2, 2, 4, '007', 'HG07', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(8, 3, 3, 5, '008', 'HG08', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(9, 3, 3, 6, '009', 'HG09', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(10, 3, 3, 7, '010', 'HG10', 'Hibrido', '2021-06-04', NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Índices para tablas volcadas
@@ -323,6 +418,12 @@ ALTER TABLE `pedestal`
   ADD KEY `Pedestal_FKIndex1` (`Acceso_idAcceso`,`Acceso_Filial_Cliente_idCliente`,`Acceso_Filial_idFilial`);
 
 --
+-- Indices de la tabla `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -330,43 +431,43 @@ ALTER TABLE `pedestal`
 -- AUTO_INCREMENT de la tabla `acceso`
 --
 ALTER TABLE `acceso`
-  MODIFY `idAcceso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idAcceso` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `administradorcliente`
 --
 ALTER TABLE `administradorcliente`
-  MODIFY `idAdministrador` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idAdministrador` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `administradorheimdall`
 --
 ALTER TABLE `administradorheimdall`
-  MODIFY `idAdministradorHeimdall` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idAdministradorHeimdall` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `contrato`
 --
 ALTER TABLE `contrato`
-  MODIFY `idContrato` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idContrato` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `idDireccion` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idDireccion` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `filial`
 --
 ALTER TABLE `filial`
-  MODIFY `idFilial` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idFilial` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
@@ -378,7 +479,7 @@ ALTER TABLE `mantenimiento`
 -- AUTO_INCREMENT de la tabla `pedestal`
 --
 ALTER TABLE `pedestal`
-  MODIFY `idPedestal` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idPedestal` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

@@ -40,6 +40,14 @@ CREATE TABLE `acceso` (
   `StatusAcceso` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `acceso`
+--
+
+INSERT INTO `acceso` (`idAcceso`, `Filial_Cliente_idCliente`, `Filial_idFilial`, `Nombre`, `Prioridad`, `TipoAcceso`, `Descripcion`, `FechaAlta`, `FechaActualizacion`, `StatusAcceso`) VALUES
+(1, 1, 1, 'Puerta 1', 'Alta', 'Peatonal', 'Acceso Principal', '2021-06-04', NULL, 1),
+(2, 1, 1, 'Puerta 2', 'Alta', 'peatonal', 'Acceso por edificio de Biología', '2021-06-04', NULL, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -52,7 +60,7 @@ CREATE TABLE `administrador` (
   `Filial_idFilial` int(10) UNSIGNED NOT NULL,
   `TipoAdministrador` varchar(45) DEFAULT NULL,
   `Nombre` varchar(100) DEFAULT NULL,
-  `ApellidorP` varchar(100) DEFAULT NULL,
+  `ApellidoP` varchar(100) DEFAULT NULL,
   `ApellidoM` varchar(100) DEFAULT NULL,
   `Genero` varchar(15) DEFAULT NULL,
   `FechaNacimiento` date DEFAULT NULL,
@@ -69,6 +77,14 @@ CREATE TABLE `administrador` (
   `FechaAlta` date DEFAULT NULL,
   `StatusAdmin` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`idAdministrador`, `Filial_Cliente_idCliente`, `Filial_idFilial`, `TipoAdministrador`, `Nombre`, `ApellidoP`, `ApellidoM`, `Genero`, `FechaNacimiento`, `Curp`, `NSS`, `Telefono`, `CodigoAdmin`, `Correo`, `Usuario`, `Contrasena`, `Area`, `Turno`, `Foto`, `FechaAlta`, `StatusAdmin`) VALUES
+(1, 1, 1, 'Principal', 'Eulalio', 'Bautista', 'Hernández', 'masculino', '1990-11-07', 'BAHE901107', '19818973893', '5560302140', 'admin01', 'eulaliobh@gmail.com', '', '', 'Dirección', 'Matutino y Vespertin', NULL, '2021-06-04', 1);
+
 
 -- --------------------------------------------------------
 
@@ -90,6 +106,13 @@ CREATE TABLE `cliente` (
   `FechaAlta` date DEFAULT NULL,
   `StatusCliente` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`idCliente`, `GiroComercial`, `Nombre`, `RFC`, `Telefono`, `Correo`, `Url`, `Tamano`, `NombreDirector`, `Ambito`, `FechaAlta`, `StatusCliente`) VALUES
+(1, 'Educación', 'Universidad Autónoma Metropolitana', 'UAM740223H78', '5529301276', 'contacto@uam.edu.mx', 'http://www.uam.mx', 'G', 'Ángel Pérez Bautista', 'Universitario', '2021-06-04', 1);
 
 -- --------------------------------------------------------
 
@@ -137,6 +160,13 @@ CREATE TABLE `direccion` (
   `Refencia` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `direccion`
+--
+
+INSERT INTO `direccion` (`idDireccion`, `Filial_Cliente_idCliente`, `Filial_idFilial`, `Pais`, `Estado`, `Municipio`, `Colonia`, `CP`, `Calle`, `NumeroInterior`, `NumeroExterior`, `NombreEdificio`, `Latitud`, `Longitud`, `UrlUbicacion`, `Refencia`) VALUES
+(1, 1, 1, 'México', 'CDMX', 'Iztapalapa', 'Leyes de reforma 1ra secc', '09340', 'Av. San Rafael Atlixco', NULL, '186', NULL, '19°21′41″N', '99°04′22″O', NULL, 'entre eje 6 y sur 21');
+
 -- --------------------------------------------------------
 
 --
@@ -172,6 +202,13 @@ CREATE TABLE `filial` (
   `FechaAlta` date DEFAULT NULL,
   `StatusFilial` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `filial`
+--
+
+INSERT INTO `filial` (`idFilial`, `Cliente_idCliente`, `TipoFilial`, `Nombre`, `Encargado`, `Correo`, `Telefono1`, `Telefono2`, `FechaAlta`, `StatusFilial`) VALUES
+(1, 1, 'Unidad 1', 'UAM-Iztapalapa', 'Anastacio Clemente Ortíz', 'iztapalapa@uam.edu.mx', '5545206219', '5545206220', '2021-06-04', 1);
 
 -- --------------------------------------------------------
 
@@ -267,6 +304,17 @@ CREATE TABLE `pedestal` (
   `Actualizacion` timestamp NULL DEFAULT NULL,
   `StatusPedestal` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `pedestal`
+--
+
+INSERT INTO `pedestal` (`idPedestal`, `Acceso_Filial_idFilial`, `Acceso_Filial_Cliente_idCliente`, `Acceso_idAcceso`, `CodigoInterno`, `NumeroSerie`, `TipoConfiguracion`, `FechaInstalacion`, `Observaciones`, `Actualizacion`, `StatusPedestal`) VALUES
+(1, 1, 1, 1, '001', 'HG01', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(2, 1, 1, 1, '002', 'HG02', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(3, 1, 1, 1, '003', 'HG03', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(4, 1, 1, 2, '004', 'HG04', 'Hibrido', '2021-06-04', NULL, NULL, 1),
+(5, 1, 1, 2, '005', 'HG05', 'Hibrido', '2021-06-04', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 

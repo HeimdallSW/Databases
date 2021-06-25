@@ -1,4 +1,4 @@
-*********************************************************
+﻿*********************************************************
 ****Cambios en la Base de Datos ya montada en la Nube****
 *********************************************************
 
@@ -14,7 +14,7 @@ Hacer modificaciones pertinentes
 Guardamos y sobreescribimos el archivo xml que esta en Github
 
 b) En la carpeta de Github
-buscar el archivo del modelo en Workbench con extension mwv
+buscar el archivo del modelo en Workbench con extension .mwb
 das doble click y deberia abrirlo en Workbench
 Hacer modificaciones pertinentes
 Guardamos el Modelo y sobreescribimos el archivo en Github
