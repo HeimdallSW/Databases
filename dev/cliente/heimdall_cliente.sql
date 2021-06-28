@@ -70,7 +70,7 @@ CREATE TABLE `administrador` (
   `CodigoAdmin` varchar(30) DEFAULT NULL,
   `Correo` varchar(80) DEFAULT NULL,
   `Usuario` varchar(15) DEFAULT NULL,
-  `Contrasena` varchar(15) DEFAULT NULL,
+  `Contrasena` varchar(100) DEFAULT NULL,
   `Area` varchar(50) DEFAULT NULL,
   `Turno` varchar(20) DEFAULT NULL,
   `Foto` varchar(255) DEFAULT NULL,
